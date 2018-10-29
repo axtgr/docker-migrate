@@ -45,3 +45,8 @@ migrate:
     - some-data-volume:/volumes/some-data-volume
 ...
 ```
+
+
+## License
+
+[ISC](LICENSE)
