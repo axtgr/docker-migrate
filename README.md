@@ -1,15 +1,15 @@
 # docker-migrate
 
-A container that helps you migrate your volumes from one Docker host to another using rsync over SSH.
-
-It has two modes, server and client, and uses three env vars: `PASSWORD`, `HOST` and `PORT`. If a host is specified, it runs as a client to that host (and port), otherwise it runs as a server.
+A container that helps you copy your volumes from one Docker host to another using rsync over SSH.
 
 
 ## Usage
 
-### Source Docker host
+It can be run in two modes, _server_ (for hosting the volumes) and _client_ (for copying the volumes from the server). It uses three environment variables for configuration: `PASSWORD`, `HOST` and `PORT`. If a host is specified, it runs as a client to that host (and port), otherwise it runs as a server.
 
-Set `PASSWORD` and run the container with volumes you want to copy mounted to `/volumes` and the container's port `22` bound to any host port. It will start a server waiting for client connections. You will need to manually stop the container after the procedure is finished.
+### Source host (server)
+
+Set `PASSWORD` and run the container with volumes you want to copy mounted to `/volumes` and the container's port `22` bound to any host port. It will start a server waiting for client connections. You will have to manually stop the container after the procedure is finished.
 
 Example source `docker-compose.yml`:
 
@@ -27,7 +27,7 @@ migrate:
 ...
 ```
 
-### Destination Docker host
+### Destination host (client)
 
 Set `PASSWORD`, `HOST` and `PORT` to the corresponding values of the source, then run the container with volumes mounted to the same directories. It will connect to the server using rsync over SSH and copy the contents of the volumes while displaying the progress. After completion the container will quit.
 
