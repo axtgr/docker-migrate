@@ -39,6 +39,7 @@ migrate:
     - PORT=8722 # Source port, 8722 is default and can be omitted    
     - PASSWORD=s3cR3t
   volumes:
+    # No :ro here!
     - some-data-volume:/volumes/some-data-volume
 ...
 ```
